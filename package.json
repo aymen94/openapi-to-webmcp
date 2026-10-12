@@ -25,10 +25,13 @@
   "exports": {
     ".": "./src/index.js",
     "./parser": "./src/parser.js",
-    "./generator": "./src/generator.js"
+    "./generator": "./src/generator.js",
+    "./browser": "./dist/browser.js"
   },
-  "files": ["src", "README.md", "LICENSE"],
+  "files": ["src", "dist", "README.md", "LICENSE"],
   "scripts": {
+    "build:browser": "node scripts/build-browser.js",
+    "prepack": "npm run build:browser",
     "test": "node --test",
     "lint": "eslint src test",
     "typecheck": "node --test --test-name-pattern=\"generated TypeScript type-checks\" test/basic.test.js",

@@ -94,3 +94,31 @@ Use `headers` for custom authentication. Supply secrets at runtime; do not put t
 ```js
 import { parseOpenAPI, generateCode, validateOpenAPI } from 'openapi-to-webmcp';
 ```
+
+### Browser library via CDN
+
+The browser entry is an ES module for generating a browser-side WebMCP module
+from the normalized API object returned by `parseOpenAPI`. Parse the source
+specification as part of your build step; this browser entry does not bundle the
+Node-oriented YAML parser.
+
+```html
+<script type="module">
+  import { generateCode, validateOpenAPI } from
+    'https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1.0.0/dist/browser.js';
+
+  // `api` is the normalized result produced by parseOpenAPI during your build.
+  const api = await fetch('/normalized-openapi.json').then((response) => response.json());
+  const generated = generateCode(api);
+  console.log(generated); // Generated ESM uses fetch and document.modelContext
+</script>
+```
+
+The browser module itself is published at
+`https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1.0.0/dist/browser.js` and can
+also be imported with `import { generateCode } from 'openapi-to-webmcp/browser'`
+in bundlers. Build it locally with `npm run build:browser`; `npm pack` builds it
+automatically. The generated module registers tools through
+`document.modelContext.registerTool`, available in browsers implementing the
+[WebMCP API](https://github.com/webmachinelearning/webmcp). The browser
+environment must provide Fetch, URL, Headers, and (for Basic auth) `btoa`.

@@ -32,6 +32,25 @@ await register(); // registers with document.modelContext
 
 The module makes API calls with Fetch. The API server must permit your page through CORS. Pass credentials at runtime; generated files never contain secrets.
 
+## Browser library via CDN
+
+The browser library generates the browser-side WebMCP module from the
+normalized API object returned by `parseOpenAPI`. Parse the source document in
+your build step because the YAML parser is Node-oriented.
+
+```js
+import { generateCode } from
+  'https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1.0.0/dist/browser.js';
+
+const api = await fetch('/normalized-openapi.json').then((response) => response.json());
+const generatedModule = generateCode(api);
+```
+
+The generated module's `register()` uses `document.modelContext.registerTool`,
+so registration requires a browser that implements the [WebMCP API](https://github.com/webmachinelearning/webmcp).
+The package CDN artifact is built by `npm run build:browser` and automatically
+before `npm pack`.
+
 ## More
 
 - [Developer guide]({% link development.md %}) for local setup, architecture, and project commands.
