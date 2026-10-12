@@ -9,6 +9,8 @@ import { parseOpenAPI } from "../src/parser.js";
 import { generateCode } from "../src/generator.js";
 import { main } from "../src/cli.js";
 
+const { version } = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
+
 const yaml = `openapi: 3.0.3\ninfo: {title: Demo, version: '1'}\nservers: [{url: https://example.com/api}]\npaths:\n  /things/{id}:\n    get:\n      operationId: fetchThing\n      parameters:\n        - {name: id, in: path, required: true, schema: {type: string}}\n        - {name: q, in: query, schema: {type: string}}\n      responses: {'200': {description: ok}}\n`;
 
 test("parses YAML and path/query parameters", () => {
@@ -73,7 +75,7 @@ test("CLI validates and writes output end to end", async () => {
     console.log = originalLog;
   }
   assert.match(await readFile(output, "utf8"), /fetchThing/);
-  assert.match(messages.join("\n"), /openapi-to-webmcp v0\.1\.0/);
+  assert.match(messages.join("\n"), new RegExp(`openapi-to-webmcp v${version.replaceAll(".", "\\.")}`));
   assert.match(messages.join("\n"), /OpenAPI: 3\.0\.3/);
   assert.match(messages.join("\n"), /API:\s+Demo/);
   assert.match(

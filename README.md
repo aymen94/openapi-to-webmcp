@@ -104,8 +104,8 @@ Node-oriented YAML parser.
 
 ```html
 <script type="module">
-  import { generateCode, validateOpenAPI } from
-    'https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1.0.0/dist/browser.js';
+  import { generateCode } from
+    'https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1/dist/browser.js';
 
   // `api` is the normalized result produced by parseOpenAPI during your build.
   const api = await fetch('/normalized-openapi.json').then((response) => response.json());
@@ -115,7 +115,7 @@ Node-oriented YAML parser.
 ```
 
 The browser module itself is published at
-`https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1.0.0/dist/browser.js` and can
+`https://cdn.jsdelivr.net/npm/openapi-to-webmcp@1/dist/browser.js` (latest 1.x) and can
 also be imported with `import { generateCode } from 'openapi-to-webmcp/browser'`
 in bundlers. Build it locally with `npm run build:browser`; `npm pack` builds it
 automatically. The generated module registers tools through
