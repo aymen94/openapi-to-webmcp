@@ -1,0 +1,22 @@
+# Dependencies and local package-manager cache
+node_modules/
+.npm-cache/
+
+# Generated WebMCP output
+webmcp.js
+webmcp.ts
+
+# Environment files and local secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

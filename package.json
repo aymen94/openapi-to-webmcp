@@ -1,0 +1,45 @@
+{
+  "name": "openapi-to-webmcp",
+  "version": "1.0.0",
+  "description": "Generate WebMCP browser tools from OpenAPI specifications",
+  "author": {
+    "name": "Aymen Naghmouchi",
+    "url": "https://aymen.xyz/"
+  },
+  "keywords": ["openapi", "webmcp", "code-generation", "cli"],
+  "homepage": "https://www.npmjs.com/package/openapi-to-webmcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aymen94/openapi-to-webmcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aymen94/openapi-to-webmcp/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "openapi-to-webmcp": "./src/cli.js"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./parser": "./src/parser.js",
+    "./generator": "./src/generator.js"
+  },
+  "files": ["src", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "node --test",
+    "lint": "eslint src test",
+    "typecheck": "node --test --test-name-pattern=\"generated TypeScript type-checks\" test/basic.test.js",
+    "pack:check": "npm pack --dry-run"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^10.12.0",
+    "typescript": "^7.0.2"
+  }
+}
